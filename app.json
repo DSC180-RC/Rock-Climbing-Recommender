@@ -1,0 +1,5 @@
+{
+    "name": "Test Name",
+    "description": "Test description",
+    "image": ["https://github.com/heroku/heroku-buildpack-inline.git", "heroku/python"]
+}
