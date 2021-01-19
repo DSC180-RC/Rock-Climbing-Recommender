@@ -13,7 +13,19 @@ def get_raw_data():
     """
     This function collates all scraping logic
     """
-    pass
+    # store raw data here
+    raw_data = []
+
+    # for now, just scrape Yosemite routes
+    area_url = "https://www.mountainproject.com/area/105833381/yosemite-national-park"
+    all_routes = find_all_routes_in_area(area_url)
+
+    # for every route in Yosemite, get the route data
+    for route_url in all_routes:
+        raw_data.append(get_route_data(route_url))
+
+    # save the raw data
+    # TODO
 
 def get_route_data(route_url):
     """
