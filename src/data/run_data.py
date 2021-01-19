@@ -5,7 +5,7 @@
 # run_data.py collates all data scraping and cleaning code into one convenient place
 
 from src.data.get_raw_data import get_raw_data
-from src.functions import *
+from src.functions import check_folder
 
 def run_data():
     """
