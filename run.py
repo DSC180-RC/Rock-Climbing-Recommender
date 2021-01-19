@@ -8,6 +8,8 @@
 import argparse
 import time
 
+from src.data.run_data import run_data
+
 def main(params=None):
     """
     The main function that runs all code. Typically, this function will be called from the command
@@ -29,8 +31,7 @@ def main(params=None):
 
     # if the user requested to run data scraping code
     if(args.data):
-        # TODO: interface with data scraping code
-        pass
+        run_data()
 
 # run.py cannot be imported as a module
 if __name__ == '__main__':
