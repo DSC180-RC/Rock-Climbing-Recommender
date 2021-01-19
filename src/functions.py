@@ -5,6 +5,7 @@
 # functions.py contains a series of functions useful across all code
 
 import os
+import json
 
 from pathlib import Path
 
@@ -45,3 +46,18 @@ def check_folder(path):
     # check that the absolute path directory exists, create if it does not
     if(not os.path.exists(absolute_path)):
         os.makedirs(absolute_path)
+
+def get_params(path):
+    """
+    This function tries to open the json file at the input path, and throws an error if it does
+    not exist
+
+    :param:     path        The path to the configuation json file
+
+    :return:    dict        A dictonary containing the contents of the configuation file
+    """
+    try:
+        with open(make_absolute(path), "r") as file:
+            return json.load(file)
+    except:
+        raise FileNotFoundError("The configuation file \"" + path + "\" does not exist.")

@@ -8,8 +8,11 @@ import requests
 import json
 
 from bs4 import BeautifulSoup
+from tqdm import tqdm
 
-def get_raw_data():
+from src.functions import make_absolute
+
+def get_raw_data(data_params):
     """
     This function collates all scraping logic
     """
@@ -21,11 +24,12 @@ def get_raw_data():
     all_routes = find_all_routes_in_area(area_url)
 
     # for every route in Yosemite, get the route data
-    for route_url in all_routes:
+    for route_url in tqdm(all_routes):
         raw_data.append(get_route_data(route_url))
 
     # save the raw data
-    # TODO
+    with open(make_absolute(data_params["raw_data_folder"] + "yosemite.json"), "w") as f:
+        json.dump(raw_data, f)
 
 def get_route_data(route_url):
     """
