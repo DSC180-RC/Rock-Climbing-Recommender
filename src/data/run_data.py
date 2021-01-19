@@ -13,6 +13,9 @@ def run_data(data_params):
 
     TODO: move the folders from a local string to a config file?
     """
+    # TODO: Delete the data folders in order to empty them, since if the user requests that data
+    #       scraping code be run, then overwrite existing data
+
     # create the folders in which to save data if the folders do not exist
     check_folder(data_params["raw_data_folder"])
     check_folder(data_params["clean_data_folder"])
@@ -21,3 +24,5 @@ def run_data(data_params):
     get_raw_data(data_params)
 
     # clean data
+    # TODO
+    
