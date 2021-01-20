@@ -39,11 +39,18 @@ def get_route_data(route_url):
     """
     Get all route data for a single route
 
-    TODO: get the users who rated and their ratings for this route
-
     :param:     route_url   The URL at which the route lives
 
-    :return:    
+    :return:    dict        A dictionary containing the following information:
+                            "@context": N/A
+                            "@type": N/A
+                            "name": Name of the climb
+                            "description": Description of the climb
+                            "image": link to the climb image
+                            "geo": dict with lat/long
+                            "aggregateRating": dict with average rating/number of ratings
+                            "route_url": url at which the route can be found
+                            "user_ratings": dict with key user_id and value user_rating (0-4)
     """
     # get the climb description
     text = requests.get(route_url).text
@@ -70,6 +77,9 @@ def get_route_rating_data(route_url):
 
     :param:     route_url   The URL at which the route lives. NOTE (!) this is not the URL at which
                             rating data can be found, it is modified in this function
+
+    :return:    dict        A dictionary containing the key of user_id and value of user rating
+                            for the input climb url
     """
     # first modify the route_url to access the stats
     route_stats_url = route_url.split("/")
@@ -119,23 +129,34 @@ def get_route_rating_data(route_url):
 def get_user_history(user_url):
     """
     Get all routes this user has climbed
-
-    TODO: get the ratings for each route?
+    Note: this function is not used
 
     :param:     user_url    The URL of the user profile
+
+    :return:    list        A list containing the url of all climbs this user has rated
     """
-    # TODO: document function
+    # store links here
     links = []
+
+    # get the html for the user
     text = requests.get(user_url + '/ticks').text
     soup = BeautifulSoup(text, 'html.parser')
+
+    # iterate over each page of climbs that the user has done
     num_pages = int(soup.find_all('a', {"class":"no-click"})[2].contents[0].strip()[-1])
     for i in range(num_pages):
         text = requests.get(user + '/ticks?page=' + str(i + 1)).text
+
+        # parse the page of climbs
         soup = BeautifulSoup(text, 'html.parser')
+
+        # get and store all links to the climbs the user has done
         all_links = soup.find_all('a')
         for link in all_links:
             if len(link.find_all('strong')) > 0 and len(link) < 2:
                 links.append({link.find('strong').contents[0]: link.get('href')})
+
+    # return the list of links
     return links
 
 def find_all_routes_in_area(area_url):
