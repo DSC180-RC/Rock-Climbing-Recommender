@@ -56,9 +56,11 @@ def split_into_user_climb(climb_dict):
     This function takes the json for a single climb and splits the data into a primary key climb_id
     dataset and a primary key user_id dataset
 
-    :param:     TODO
+    :param:     climb_dict      The full scraped contents of one climb in dict form
 
-    :return:    TODO
+    :return:    ([], [[]])      A tuple containing a list, and a list of lists. The first list   
+                                contains a row of the climb.csv file, and the second list of lists
+                                contains user_ids, climb_ids, and user_ratings
     """
     # all the info for the climb row
     climb_id = climb_dict["route_url"].split("/")[-2]
