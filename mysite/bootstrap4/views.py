@@ -5,8 +5,11 @@ sys.path.append('../../..')
 
 def bootstrap4_index(request):
     if(request.method == "POST" and "run_script" in request.POST):
-        from src.test_function import test_function
-        x = test_function(5)
-        return render(request, 'index.html', {"test": x})
+        from run import main
+
+        config = {"mongodb": True, "top_pop": True}
+
+        result = main(config)
+        return render(request, 'index.html', {"test": result})
 
     return render(request, 'index.html', {"test": "test"})

@@ -20,6 +20,9 @@ def main(params=None):
     :param:     params      Optional command line arguments in dictionary form. If not None, then
                             command line arguments will be ignored
     """
+    if(params != None):
+        return str(params)
+
     # all command line arguments
     # for a description of the arguments, refer to the README.md or run "python run.py -h"
     parser = argparse.ArgumentParser()
