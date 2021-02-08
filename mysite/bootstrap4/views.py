@@ -27,7 +27,7 @@ def bootstrap4_index(request):
 
         if(form.is_valid()):
 
-            return render(request, 'index.html', {"form": form, "recommendations": request.POST.get("mountain_project_url")})
+            return render(request, 'index.html', {"form": form, "recommendations": request.POST.get("url")})
 
         else:
             form = RecInputForm()
