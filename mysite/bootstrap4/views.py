@@ -9,7 +9,7 @@ def bootstrap4_index(request):
         # import the main function and run it with the selected options
         from run import main
         config = {"mongodb": True, "top_pop": True}
-        result = main(config)
+        # result = main(config)
 
         # return the template but with the returned contents of main
         return render(request, 'index.html', {"test": request.POST.get("user_url")})
