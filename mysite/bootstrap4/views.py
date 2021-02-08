@@ -27,11 +27,12 @@ def bootstrap4_index(request):
 
         if(form.is_valid()):
 
-            return HttpResponseRedirect("/test/")
+            return render(request, 'index.html', {"form": form, "recommendations": request.POST.get("mountain_project_url")})
 
         else:
             form = RecInputForm()
 
-        return render(request, 'index.html', {"form": form})
+        return render(request, 'index.html', {"form": form, "recommendations": "bad submit"})
 
-    return render(request, 'index.html')
+    form = RecInputForm()
+    return render(request, 'index.html', {"form": form, "recommendations": "initial open"})
