@@ -11,7 +11,13 @@ def bootstrap4_index(request):
         config = {"mongodb": True, "top_pop": True}
         # result = main(config)
 
+        test = {"user_url": request.POST.get("user_url"),
+            "lat": request.POST.get("lat"),
+            "long": request.POST.get("long"),
+            "num_rec": request.POST.get("num-rec"),
+            "recommenders": [request.POST.get("top-pop"), request.POST.get("other-rec")]}
+
         # return the template but with the returned contents of main
-        return render(request, 'index.html', {"test": request.POST.get("user_url")})
+        return render(request, 'index.html', {"test": test})
 
     return render(request, 'index.html', {"test": "click above button to see the top 10 most popular routes"})
