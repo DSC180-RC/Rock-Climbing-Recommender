@@ -15,7 +15,7 @@
         <form method="POST">
             {% csrf_token %}
 
-            <div class="form-group row">
+<!--             <div class="form-group row">
                 <label for="user_url" class="col-md-4 col-form-label">Mountain Project URL</label>
                 <div class="col-md-8">
                     <input type="url" class="form-control", id="user_url", name="user_url">
@@ -53,7 +53,9 @@
                         </div>
                     </div>
                 </div>
-            </fieldset>
+            </fieldset> -->
+
+            {{ form }}
 
             <button type="submit" name="run_script">Click Me for the Top 10 Popular Routes!</button>
         </form>
