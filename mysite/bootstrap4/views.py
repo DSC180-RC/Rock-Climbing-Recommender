@@ -27,7 +27,13 @@ def bootstrap4_index(request):
 
         if(form.is_valid()):
 
-            return render(request, 'index.html', {"form": form, "recommendations": request.POST.get("url")})
+            inputs = {
+                "user_url": request.POST.get("url"),
+                "location": [request.POST.get("latitude"), request.POST.get("longitude")],
+                "recommender": request.POST.get("rec")
+            }
+
+            return render(request, 'index.html', {"form": form, "recommendations": inputs})
 
         else:
             form = RecInputForm()
