@@ -32,10 +32,8 @@ def top_pop(args=None, data_params=None):
         climbs = client.MountainProject.climbs
         df = pd.DataFrame.from_records(list(climbs.find()))
     
-    #returns a a simple TopPopular
+    # returns a a simple TopPopular in dict format
     toppop = df[df['avg_rating'] >= 3.5].sort_values('num_ratings', ascending=False)[:10]
-    
     result_json = toppop[['climb_id', 'name']].set_index('climb_id').to_json()
-    # print(result_json)
-    
-    return 'The top 10 popular routes: ' + str(result_json)
+
+    return result_json
