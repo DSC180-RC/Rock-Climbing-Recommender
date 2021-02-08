@@ -5,5 +5,5 @@ class RecInputForm(forms.Form):
     latitude = forms.DecimalField(label="Latitude")
     longitude = forms.DecimalField(label="Longitude")
     rec = forms.MultipleChoiceField(label="Recommenders", choices=(
-        ("1", "Top Popular"),
-        ("2", "Other Recommender")))
+        ("top_pop", "Top Popular"),
+        ("other", "Other Recommender")))
