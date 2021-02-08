@@ -12,6 +12,6 @@ def bootstrap4_index(request):
         result = main(config)
 
         # return the template but with the returned contents of main
-        return render(request, 'index.html', {"test": result})
+        return render(request, 'index.html', {"test": request.POST.get("user_url")})
 
     return render(request, 'index.html', {"test": "click above button to see the top 10 most popular routes"})
