@@ -27,13 +27,19 @@ def bootstrap4_index(request):
 
         if(form.is_valid()):
 
+            # create the config dictionary to pass into amin
             inputs = {
                 "user_url": request.POST.get("url"),
                 "location": [request.POST.get("latitude"), request.POST.get("longitude")],
                 "recommender": request.POST.get("rec")
             }
 
-            return render(request, 'index.html', {"form": form, "recommendations": inputs})
+            # run the main code
+            from run import main
+            result = main(inputs)
+
+            # return the value of the main code
+            return render(request, 'index.html', {"form": form, "recommendations": result})
 
         else:
             form = RecInputForm()
