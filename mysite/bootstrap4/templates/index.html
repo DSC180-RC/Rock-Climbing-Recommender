@@ -46,7 +46,7 @@
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
       function initAutocomplete() {
         const map = new google.maps.Map(document.getElementById("googleMap"), {
-          center: { lat: "{{latitude}}", lng: "{{longitude}}" },
+          center: { lat: parseFloat("{{latitude}}"), lng: parseFloat("{{longitude}}") },
           zoom: 13,
           mapTypeId: "roadmap",
         });
@@ -108,7 +108,7 @@
       }
     </script>
 
-    
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0dGNYTwHVcaaGSLQI8b6cCJ0swGyBlko&callback=initAutocomplete&libraries=places&v=weekly" async></script>
 
 
