@@ -33,13 +33,19 @@
           mapTypeId: "roadmap",
         });
 
+        function getLatLong() {
+            x = parseFloat(document.getElementById('id_latitude').value);
+            y = parseFloat(document.getElementById('id_longitude').value);
+            return{lat: x, lng:y}
+        }
+
         // add event listeners to the lat/long input fields to update the map position when the
         // value is changed
         document.getElementById('id_latitude').addEventListener("change", function() {
-            map.setCenter({lat: document.getElementById('id_latitude').value, lng: document.getElementById('id_longitude').value})
+            map.setCenter(getLatLong())
         });
         document.getElementById('id_longitude').addEventListener("change", function() {
-            map.setCenter({lat: document.getElementById('id_latitude').value, lng: document.getElementById('id_longitude').value})
+            map.setCenter(getLatLong())
         });
 
         // Add event listeners to update the lat and long as the map is dragged around
