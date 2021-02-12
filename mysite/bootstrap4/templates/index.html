@@ -36,13 +36,15 @@
         // Add event listeners to update the lat and long as the map is dragged around
         google.maps.event.addListener(map,'drag',function(event) {
             console.log("map is being dragged")
-            document.getElementById('id_latitude').value = event.latLng.lat();
-            document.getElementById('id_longitude').value = event.latLng.lng();
+            console.log(event)
+            // document.getElementById('id_latitude').value = event.latLng.lat();
+            // document.getElementById('id_longitude').value = event.latLng.lng();
         });
-        // google.maps.event.addListener(map,'dragend',function(event) {
-        //     document.getElementById('id_latitude').value = event.latLng.lat();
-        //     document.getElementById('id_longitude').value = event.latLng.lng();
-        // });
+        google.maps.event.addListener(map,'dragend',function(event) {
+            console.log("map is not being dragged anymore")
+            // document.getElementById('id_latitude').value = event.latLng.lat();
+            // document.getElementById('id_longitude').value = event.latLng.lng();
+        });
 
         // Create the search box and link it to the UI element.
         const input = document.getElementById("pac-input");
