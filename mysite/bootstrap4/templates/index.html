@@ -34,11 +34,11 @@
         });
 
         // Add event listeners to update the lat and long as the map is dragged around
-        google.maps.event.addListener(marker,'drag',function(event) {
+        map.addListener(marker,'drag',function(event) {
             document.getElementById('id_latitude').value = event.latLng.lat();
             document.getElementById('id_longitude').value = event.latLng.lng();
         });
-        google.maps.event.addListener(marker,'dragend',function(event) {
+        map.addListener(marker,'dragend',function(event) {
             document.getElementById('id_latitude').value = event.latLng.lat();
             document.getElementById('id_longitude').value = event.latLng.lng();
         });
