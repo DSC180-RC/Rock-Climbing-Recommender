@@ -24,26 +24,8 @@
         </form>
         <p>{{ recommendations }}</p>
     </div>
-<!-- 
-    <script>
-    function myMap() {
-        var mapProp= {
-            center:new google.maps.LatLng("{{latitude}}","{{longitude}}"),
-            zoom:5,
-            gestureHandling: "none",
-        };
-        var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    }
-    </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0dGNYTwHVcaaGSLQI8b6cCJ0swGyBlko&callback=myMap&libraries=places&v=weekly"></script> -->
     <script>
-      // This example adds a search box to a map, using the Google Place Autocomplete
-      // feature. People can enter geographical searches. The search box will return a
-      // pick list containing a mix of places and predicted search terms.
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
       function initAutocomplete() {
         const map = new google.maps.Map(document.getElementById("googleMap"), {
           center: { lat: parseFloat("{{latitude}}"), lng: parseFloat("{{longitude}}") },
@@ -108,9 +90,7 @@
       }
     </script>
 
-
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0dGNYTwHVcaaGSLQI8b6cCJ0swGyBlko&callback=initAutocomplete&libraries=places&v=weekly" async></script>
-
 
 </body>
 

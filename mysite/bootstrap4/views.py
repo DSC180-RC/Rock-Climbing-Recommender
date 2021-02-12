@@ -6,7 +6,7 @@ from .forms import RecInputForm
 import sys
 sys.path.append('../../..')
 
-def template(form=None, rec="", latitude=33.8734, longitude=115.9010):
+def template(form=None, rec="", latitude=33.8734, longitude=-115.9010):
     """
     TODO
 
