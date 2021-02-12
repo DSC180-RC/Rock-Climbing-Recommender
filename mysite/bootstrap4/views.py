@@ -16,7 +16,7 @@ def template(form=None, rec="", latitude=33.8734, longitude=115.9010):
         "form": form,
         "recommendations": rec,
         "latitude": latitude,
-        "long": longitude
+        "longitude": longitude
     }
 
     return template_default
