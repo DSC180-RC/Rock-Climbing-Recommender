@@ -35,10 +35,12 @@
 
         // Add event listeners to update the lat and long as the map is dragged around
         google.maps.event.addListener(map,'drag',function(event) {
-            console.log(map.getCenter())
+            document.getElementById('id_latitude').value = map.getCenter().lat();
+            document.getElementById('id_longitude').value = map.getCenter().lng();
         });
         google.maps.event.addListener(map,'dragend',function(event) {
-            console.log(map.getCenter())
+            document.getElementById('id_latitude').value = map.getCenter().lat();
+            document.getElementById('id_longitude').value = map.getCenter().lng();
         });
 
         // Create the search box and link it to the UI element.
