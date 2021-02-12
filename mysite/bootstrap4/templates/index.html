@@ -24,12 +24,12 @@
         <p>{{ recommendations }}</p>
     </div>
 
-
     <script>
     function myMap() {
         var mapProp= {
             center:new google.maps.LatLng("{{latitude}}","{{longitude}}"),
             zoom:5,
+            gestureHandling: "none",
         };
         var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
     }
