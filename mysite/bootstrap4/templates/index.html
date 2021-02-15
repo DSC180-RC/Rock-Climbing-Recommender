@@ -114,8 +114,8 @@
           map.fitBounds(bounds);
 
           // update lag/long when search box updates the map
-          document.getElementById('id_latitude').value = map.getCenter().lat();
-          document.getElementById('id_longitude').value = map.getCenter().lng();
+          document.getElementById('id_latitude').value = map.getCenter().lat().toFixed(6);
+          document.getElementById('id_longitude').value = map.getCenter().lng().toFixed(6);
         });
       }
     </script>
