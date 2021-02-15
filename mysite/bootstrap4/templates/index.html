@@ -58,6 +58,14 @@
             document.getElementById('id_longitude').value = map.getCenter().lng().toFixed(6);
         });
 
+        // Add event listeners to update the lat/lng when the map is zoomed (for some reason in
+        // google maps, zoom does not have a fixed center but depends on where the mouse is)
+        google.maps.event.addListener(map,'zoom_changed',function(event) {
+            document.getElementById('id_latitude').value = map.getCenter().lat().toFixed(6);
+            document.getElementById('id_longitude').value = map.getCenter().lng().toFixed(6);
+        });
+
+
         // Create the search box and link it to the UI element.
         const input = document.getElementById("pac-input");
         const searchBox = new google.maps.places.SearchBox(input);
