@@ -64,8 +64,8 @@ def secondary_validation(request):
     error_str = ""
 
     # get the boulder grades
-    bl = request.POST.get("boulder_lower")
-    bu = request.POST.get("boulder_upper")
+    bl = int(request.POST.get("boulder_lower"))
+    bu = int(request.POST.get("boulder_upper"))
 
     # validate the boulder grades
     if(bl > bu):
