@@ -1,7 +1,5 @@
 from django import forms
 
-from django.core.exceptions import ValidationError
-
 class NoColon(forms.Form):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
@@ -34,5 +32,5 @@ class RecInputForm(NoColon):
 
         # make sure that boulder_lower is lower or equal difficulty to boulder_upper
         if(cleaned_data.get("boulder_lower") > cleaned_data.get("boulder_upper")):
-            self.add_error("boulder_lower", ValidationError("Lowest Boulder Grade should be less "
+            self.add_error("boulder_lower", forms.ValidationError("Lowest Boulder Grade should be less "
                 "than or equal to Highest Boulder Grade"))
