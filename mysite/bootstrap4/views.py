@@ -78,10 +78,10 @@ def secondary_validation(request):
 
     # validate the route grades
     if(rl is None):
-        error_str += f"<p>Lowest Route Grade ({request.POST.get("route_lower")}) is an invalid " \
+        error_str += f"<p>Lowest Route Grade ({request.POST.get('route_lower')}) is an invalid " \
             "difficulty.</p>\n"
     if(ru is None):
-        error_str += f"<p>Highest Route Grade ({request.POST.get("route_upper")}) is an invalid " \
+        error_str += f"<p>Highest Route Grade ({request.POST.get('route_upper')}) is an invalid " \
             "difficulty.</p>\n"
     if((rl is not None) and (ru is not None)):
         if(rl > ru):
