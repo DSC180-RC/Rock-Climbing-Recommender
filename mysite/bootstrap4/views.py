@@ -7,7 +7,7 @@ from .forms import RecInputForm
 import sys
 sys.path.append('../../..')
 
-def template(form=None, rec="", latitude=33.8734, longitude=-115.9010):
+def template(form=None, rec="", latitude=33.8734, longitude=-115.9010, results=[]):
     """
     TODO
 
@@ -17,7 +17,8 @@ def template(form=None, rec="", latitude=33.8734, longitude=-115.9010):
         "form": form,
         "recommendations": rec,
         "latitude": latitude,
-        "longitude": longitude
+        "longitude": longitude,
+        "results": results
     }
 
     return template_default
@@ -40,16 +41,35 @@ def bootstrap4_index(request):
 
             # run the main code
             from run import main
-            result = main(inputs[0])
+            results = main(inputs[0])
+
+            # transform the return dictionary into the proper format for django templates
+            trans_results = format_django(results)
 
             # return the value of the main code
-            return render(request, 'index.html', template(form, result, inputs[0]["location"][0], 
-                inputs[0]["location"][1]))
+            return render(request, 'index.html', template(form, results, inputs[0]["location"][0], 
+                inputs[0]["location"][1], trans_results))
 
         return render(request, 'index.html', template(form))
 
     form = RecInputForm()
     return render(request, 'index.html', template(form))
+
+def format_django(results):
+    """
+    TODO
+
+    TODO
+    """
+    formatted = []
+    for key, value in results["name"]:
+        formatted.append({
+            "name": value,
+            "url": f"https://www.mountainproject.com/route/{key}"
+        })
+
+    return formatted
+
 
 def secondary_validation(request):  
     """
