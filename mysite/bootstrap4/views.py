@@ -32,17 +32,18 @@ def bootstrap4_index(request):
             # run the secondary validation code
             inputs = secondary_validation(request)
 
-            # if there are errors, then a string would be returned
-            if(isinstance(inputs, str)):
-                return render(request, 'index.html', template(form, inputs))
+            # if there are errors, then the bool flag would be true
+            if(inputs[0]):
+                return render(request, 'index.html', template(form, inputs[2], 
+                    inputs[1]["location"][0], inputs[1]["location"][1]))
 
             # run the main code
             from run import main
-            result = main(inputs)
+            result = main(inputs[1])
 
             # return the value of the main code
-            return render(request, 'index.html', template(form, result, inputs["location"][0], 
-                inputs["location"][1]))
+            return render(request, 'index.html', template(form, result, inputs[1]["location"][0], 
+                inputs[1]["location"][1]))
 
         return render(request, 'index.html', template(form))
 
@@ -56,9 +57,8 @@ def secondary_validation(request):
 
     :param:     request     The POST request
 
-    :return:    dict        A formatted dictionary containing all information needed to make a 
-                            recommendation
-    :return:    str         If there is some error, return a string to display to the user
+    :return:    (bool, dict, str)   The bool is if there is an error, the dict contains the input
+                                    to the main function, and the string contains the error message
     """
     # store error string here if necessary
     error_str = ""
@@ -84,10 +84,6 @@ def secondary_validation(request):
         if(rl > ru):
             error_str += "Lowest Route Grade should be less than or equal to Highest Route Grade.\n"
 
-    # if some errors were encountered, return the error string
-    if(not error_str):
-        return error_str
-
     # create the config dictionary to pass into main
     inputs = {
         "user_url": request.POST.get("url"),
@@ -99,7 +95,7 @@ def secondary_validation(request):
             "route": [rl, ru]
         }
     }
-    return inputs
+    return (not error_str, inputs, error_str)
 
 def route_to_int(route_str):
     """
