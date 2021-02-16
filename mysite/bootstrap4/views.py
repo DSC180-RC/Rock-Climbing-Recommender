@@ -41,10 +41,8 @@ def bootstrap4_index(request):
             result = main(inputs)
 
             # return the value of the main code
-            return render(request, 'index.html', template(form, result, inputs["location"][0], inputs["location"][1]))
-
-        else:
-            form = RecInputForm()
+            return render(request, 'index.html', template(form, result, inputs["location"][0], 
+                inputs["location"][1]))
 
         return render(request, 'index.html', template(form, "bad submit"))
 
