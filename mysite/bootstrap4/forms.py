@@ -8,7 +8,7 @@ class NoColon(forms.Form):
         super(NoColon, self).__init__(*args, **kwargs)
 
 class RecInputForm(NoColon):
-    url = forms.URLField(label="Mountain Project UR:L", max_length=100)
+    url = forms.URLField(label="Mountain Project URL:", max_length=100)
     latitude = forms.DecimalField(label="Latitude:", initial=33.8734)
     longitude = forms.DecimalField(label="Longitude:", initial=-115.9010)
     rec = forms.MultipleChoiceField(label="Recommenders:", choices=(
@@ -30,11 +30,9 @@ class RecInputForm(NoColon):
         3. The route_lower is a lower or equal difficulty to the route_upper 
         """
         # do the default form cleaning
-        super().clean()
+        cleaned_data = super().clean()
 
         # make sure that boulder_lower is lower or equal difficulty to boulder_upper
-        bl = self.cleaned_data.get("boulder_lower")
-        bu = self.cleaned_data.get("boulder_upper")
-        if(bl > bu):
-            raise ValidationError("Lower Boulder Grade should be less than or equal to Highest "
-                "Boulder Grade")
+        if(cleaned_data.get("boulder_lower") > cleaned_data.get("boulder_upper")):
+            self.add_error("boulder_lower", ValidationError("Lowest Boulder Grade should be less "
+                "than or equal to Highest Boulder Grade"))
