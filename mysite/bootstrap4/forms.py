@@ -12,7 +12,9 @@ class RecInputForm(NoColon):
     rec = forms.MultipleChoiceField(label="Recommenders:", choices=(
         ("top_pop", "Top Popular"),
         ("other", "Other Recommender")))
-    boulder_lower = forms.IntegerField(label="Lowest Boulder Grade: V")
-    boulder_upper = forms.IntegerField(label="Highest Boulder Grade: V")
-    route_lower = forms.IntegerField(label="Lowest Route Grade: 5.")
-    route_upper = forms.IntegerField(label="Highest Route Grade: 5.")
+    boulder_lower = forms.IntegerField(label="Lowest Boulder Grade: V", min_value=0, max_value=16, 
+        initial=0)
+    boulder_upper = forms.IntegerField(label="Highest Boulder Grade: V", min_value=0, max_value=16,
+        initial=3)
+    route_lower = forms.CharField(label="Lowest Route Grade: 5.", max_length=3, initial="8")
+    route_upper = forms.CharField(label="Highest Route Grade: 5.", max_length=3, initial="10d")
