@@ -85,8 +85,9 @@ def secondary_validation(request):
             "difficulty.\n"
     if((rl is not None) and (ru is not None)):
         if(rl > ru):
-            error_str += f"Lowest Route Grade (5.{rl}) should be less than or equal to Highest " \
-                f"Route Grade (5.{ru}).\n"
+            error_str += f"Lowest Route Grade (5.{request.POST.get('route_lower')}) should be " \
+                f"less than or equal to Highest Route Grade " \
+                f"(5.{request.POST.get('route_upper')}).\n"
 
     # create the config dictionary to pass into main
     inputs = {
