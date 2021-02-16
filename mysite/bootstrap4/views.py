@@ -33,17 +33,17 @@ def bootstrap4_index(request):
             inputs = secondary_validation(request)
 
             # if there are errors, then the bool flag would be true
-            if(inputs[0]):
-                return render(request, 'index.html', template(form, inputs[2], 
-                    inputs[1]["location"][0], inputs[1]["location"][1]))
+            if(inputs[1]):
+                return render(request, 'index.html', template(form, inputs[1], 
+                    inputs[0]["location"][0], inputs[0]["location"][1]))
 
             # run the main code
             from run import main
             result = main(inputs[1])
 
             # return the value of the main code
-            return render(request, 'index.html', template(form, result, inputs[1]["location"][0], 
-                inputs[1]["location"][1]))
+            return render(request, 'index.html', template(form, result, inputs[0]["location"][0], 
+                inputs[0]["location"][1]))
 
         return render(request, 'index.html', template(form))
 
@@ -57,8 +57,8 @@ def secondary_validation(request):
 
     :param:     request     The POST request
 
-    :return:    (bool, dict, str)   The bool is if there is an error, the dict contains the input
-                                    to the main function, and the string contains the error message
+    :return:    (dict, str)     The dict contains the input to the main function, and the string 
+                                contains the error message (can be "")
     """
     # store error string here if necessary
     error_str = ""
@@ -95,7 +95,7 @@ def secondary_validation(request):
             "route": [rl, ru]
         }
     }
-    return (not error_str, inputs, error_str)
+    return (inputs, error_str)
 
 def route_to_int(route_str):
     """
@@ -105,7 +105,7 @@ def route_to_int(route_str):
 
     :return:    int         An integer representation of the grade
     """
-    mapping = ["1", "2", "3", "4", "5", "6", "7", "", "8", "9", "10a", "10b", "10c", "10d", "11a", 
+    mapping = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10a", "10b", "10c", "10d", "11a", 
         "11b", "11c", "11d", "12a", "12b", "12c", "12d", "13a", "13b", "13c", "13d", "14a", "14b", 
         "14c", "14d", "15a", "15b", "15c", "15d"]
 
