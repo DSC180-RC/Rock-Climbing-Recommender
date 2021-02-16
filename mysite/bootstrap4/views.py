@@ -39,7 +39,7 @@ def bootstrap4_index(request):
 
             # run the main code
             from run import main
-            result = main(inputs[1])
+            result = main(inputs[0])
 
             # return the value of the main code
             return render(request, 'index.html', template(form, result, inputs[0]["location"][0], 
