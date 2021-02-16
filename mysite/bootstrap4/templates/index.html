@@ -26,6 +26,8 @@
         <form method="POST">
             {% csrf_token %}
 
+            {{ form.non_field_errors }}
+
             {{ form }}
 
             <input type="text" id="pac-input" class="controls", placeholder="Search Box">
@@ -35,6 +37,10 @@
         </form>
         <p>{{ recommendations }}</p>
     </div>
+
+    <script type="text/javascript">
+        // js to slightly
+    </script>
 
     <script>
       function initAutocomplete() {
