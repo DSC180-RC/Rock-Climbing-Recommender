@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="{% static 'bootstrap4/nouislider.min.css' %}" type="text/css" rel="stylesheet">
     <title>TITLE TODO</title>
 </head>
 
@@ -18,9 +17,6 @@
             {% csrf_token %}
 
             {{ form }}
-
-            <div id="boulder-slider"></div>
-            <div id="route-slider"></div>
 
             <input type="text" id="pac-input" class="controls", placeholder="Search Box">
             <div id="googleMap" style="width:100%;height:400px;"></div>
@@ -133,29 +129,6 @@
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0dGNYTwHVcaaGSLQI8b6cCJ0swGyBlko&callback=initAutocomplete&libraries=places&v=weekly" async></script>
-
-    <script src="{% static 'bootstrap4/nouislider.min.js' %}" type="application/javascript"></script>
-
-    <script>
-        // Create the slider
-        var slider = document.getElementById('boulder-slider');
-        noUiSlider.create(slider, {
-            start: [0, 5],
-            connect: true,
-            step: 1,
-            range: {
-                'min': -1,
-                'max': 16
-            }
-        });
-
-        // Have the slider update the correct form fields when the slider is moved
-        slider.noUiSlider.on("update", function(values, handle) {
-            console.log(values);
-            console.log(handle);
-        });
-
-    </script>
 
 </body>
 
