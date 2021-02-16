@@ -67,12 +67,16 @@ def secondary_validation(request):
     # get the url
     url = request.POST.get("url")
 
-    # validate the url
+    # validate the url structure
     validator = URLValidator()
     try:
         validator(url)
     except ValidationError:
-        error_str += f"Mountain Project URL ({url}) is invalid.\n"
+        error_str += f"Mountain Project URL ({url}) is not a valid user page.\n"
+
+    # validate that the url contains both "mountainproject.com" and "user"
+    if((not error_str) and (("mountainproject.com" not in url) or ("user" not in url))):
+        error_str += f"Mountain Project URL ({url}) is not a valid user page.\n"
 
     # get the boulder grades
     bl = int(request.POST.get("boulder_lower"))
