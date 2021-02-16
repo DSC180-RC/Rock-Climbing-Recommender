@@ -69,8 +69,8 @@ def secondary_validation(request):
 
     # validate the boulder grades
     if(bl > bu):
-        error_str += f"<p>Lowest Boulder Grade ({bl}) should be less than or equal to Highest " \
-            "Boulder Grade ({bu}).</p>\n"
+        error_str += f"Lowest Boulder Grade ({bl}) should be less than or equal to Highest " \
+            f"Boulder Grade ({bu}).\n"
 
     # get the route grades
     rl = route_to_int(request.POST.get("route_lower"))
@@ -78,15 +78,15 @@ def secondary_validation(request):
 
     # validate the route grades
     if(rl is None):
-        error_str += f"<p>Lowest Route Grade ({request.POST.get('route_lower')}) is an invalid " \
-            "difficulty.</p>\n"
+        error_str += f"Lowest Route Grade ({request.POST.get('route_lower')}) is an invalid " \
+            "difficulty.\n"
     if(ru is None):
-        error_str += f"<p>Highest Route Grade ({request.POST.get('route_upper')}) is an invalid " \
-            "difficulty.</p>\n"
+        error_str += f"Highest Route Grade ({request.POST.get('route_upper')}) is an invalid " \
+            "difficulty.\n"
     if((rl is not None) and (ru is not None)):
         if(rl > ru):
-            error_str += f"<p>Lowest Route Grade ({rl}) should be less than or equal to Highest " \
-                "Route Grade ({ru}).</p>\n"
+            error_str += f"Lowest Route Grade ({rl}) should be less than or equal to Highest " \
+                f"Route Grade ({ru}).\n"
 
     # create the config dictionary to pass into main
     inputs = {
