@@ -62,7 +62,7 @@ def format_django(results):
     TODO
     """
     formatted = []
-    for key, value in results["name"]:
+    for key, value in results["name"].items():
         formatted.append({
             "name": value,
             "url": f"https://www.mountainproject.com/route/{key}"
