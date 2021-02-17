@@ -4,6 +4,8 @@ from django.core.validators import URLValidator
 
 from .forms import RecInputForm
 
+import ast
+
 import sys
 sys.path.append('../../..')
 
@@ -62,7 +64,7 @@ def format_django(results):
     TODO
     """
     formatted = []
-    for key, value in results["name"].items():
+    for key, value in ast.literal_eval(results)["name"].items():
         formatted.append({
             "name": value,
             "url": f"https://www.mountainproject.com/route/{key}"
