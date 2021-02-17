@@ -35,10 +35,14 @@
         </form>
         <p>{{ recommendations }}</p>
         <table>
+            <tr>
+                <td>Climb Name</td>
+                <td>Climb URL</td>
+            </tr>
             {% for r in results %}
             <tr>
-                <th>{{ r.name }}</th>
-                <th>{{ r.url }}</th>
+                <td>{{ r.name }}</td>
+                <td><a href="{{ r.url }}">{{ r.url }}</a></td>
             </tr>
             {% endfor %}
         </table>
