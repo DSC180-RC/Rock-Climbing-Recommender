@@ -49,7 +49,7 @@ def bootstrap4_index(request):
             trans_results = format_django(results)
 
             # return the value of the main code
-            return render(request, 'index.html', template(form, results, inputs[0]["location"][0], 
+            return render(request, 'index.html', template(form, "", inputs[0]["location"][0], 
                 inputs[0]["location"][1], trans_results))
 
         return render(request, 'index.html', template(form))
