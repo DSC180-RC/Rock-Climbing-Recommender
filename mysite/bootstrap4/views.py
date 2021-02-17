@@ -59,9 +59,13 @@ def bootstrap4_index(request):
 
 def format_django(results):
     """
-    TODO
+    Take the output of the recommender and modify it so that django can automatically put it into
+    table form
 
-    TODO
+    :param:     results     The output of the recommender
+
+    :return:    [{"name", "url"}, etc.]     The input recommendations formatted such that django
+                                            template and correctly put them into a table
     """
     formatted = []
     for key, value in ast.literal_eval(results)["name"].items():
