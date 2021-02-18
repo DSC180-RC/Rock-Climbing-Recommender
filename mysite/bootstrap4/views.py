@@ -9,7 +9,7 @@ import ast
 import sys
 sys.path.append('../../..')
 
-def template(form=None, rec="", latitude=33.8734, longitude=-115.9010, results=[]):
+def template(form=None, notes="", latitude=33.8734, longitude=-115.9010, results=[]):
     """
     TODO
 
@@ -17,7 +17,7 @@ def template(form=None, rec="", latitude=33.8734, longitude=-115.9010, results=[
     """
     template_default = {
         "form": form,
-        "recommendations": rec,
+        "notes": rec,
         "latitude": latitude,
         "longitude": longitude,
         "results": results
