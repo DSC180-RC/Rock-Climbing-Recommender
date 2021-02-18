@@ -1,3 +1,10 @@
+# Brian Cheng
+# Eric Liu
+# Brent Min
+
+# views.py contains the logic needed to do form validation and render the various webpages of
+# the heroku app
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.validators import URLValidator
@@ -11,9 +18,18 @@ sys.path.append('../../..')
 
 def template(form=None, notes="", latitude=33.8734, longitude=-115.9010, results=[]):
     """
-    TODO
+    A nice way to update all template inputs to the render functions all at once.
 
-    TODO
+    :param:     form        The current contents of the main form. This input allows the site to
+                            remember what the user has previously entered
+    :param:     notes       Various notes to display to the user. Commonly used for debug messages
+                            and reporting errors from form validation
+    :param:     latitude    The latitude to display on the map. Default is at JTree
+    :param:     longitude   The longitude to display on the map. Default is at JTree
+    :param:     results     A list containing the recommendations. This is formatted by django
+                            templates
+
+    :return:    dict        A dictionary as shown below 
     """
     template_default = {
         "form": form,
@@ -134,6 +150,7 @@ def secondary_validation(request):
     inputs = {
         "user_url": request.POST.get("url"),
         "location": [request.POST.get("latitude"), request.POST.get("longitude")],
+        "max_distance": request.POST.get("max_distance"),
         "recommender": request.POST.get("rec"),
         "num_recs": request.POST.get("num_recs"),
         "difficulty_range": {
