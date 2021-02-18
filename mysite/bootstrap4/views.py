@@ -33,7 +33,7 @@ def template(form=None, notes="", latitude=33.8734, longitude=-115.9010, results
     """
     template_default = {
         "form": form,
-        "notes": rec,
+        "notes": notes,
         "latitude": latitude,
         "longitude": longitude,
         "results": results
