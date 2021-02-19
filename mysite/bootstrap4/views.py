@@ -120,20 +120,25 @@ def secondary_validation(form):
         error_str += f"Mountain Project URL ({url}) is not a valid user page.\n"
 
     # get the boulder grades
-    bl = int(form.cleaned_data["boulder_lower"])
-    bu = int(form.cleaned_data["boulder_upper"])
+    if(form.cleaned_data["get_boulder"]):
+        bl = int(form.cleaned_data["boulder_lower"])
+        bu = int(form.cleaned_data["boulder_upper"])
 
-    # validate the boulder grades if the box is checked
-    if((form.cleaned_data["get_boulder"]) and (bl > bu)):
-        error_str += f"Lowest Boulder Grade (V{bl}) should be less than or equal to Highest " \
-            f"Boulder Grade (V{bu}).\n"
+        # validate the boulder grades if the box is checked
+        if(bl > bu):
+            error_str += f"Lowest Boulder Grade (V{bl}) should be less than or equal to Highest " \
+                f"Boulder Grade (V{bu}).\n"
+    # if the user did not want boulders
+    else:
+        bl = -1
+        bu = -1
 
     # get the route grades
-    rl = route_to_int(form.cleaned_data["route_lower"])
-    ru = route_to_int(form.cleaned_data["route_upper"])
-
-    # validate the route grades if the box is checked
     if(form.cleaned_data["get_route"]):
+        rl = route_to_int(form.cleaned_data["route_lower"])
+        ru = route_to_int(form.cleaned_data["route_upper"])
+
+        # validate the route grades
         if(rl is None):
             error_str += f"Lowest Route Grade (5.{form.cleaned_data['route_lower']}) is an " \
                 "invalid difficulty.\n"
@@ -145,6 +150,10 @@ def secondary_validation(form):
                 error_str += f"Lowest Route Grade (5.{form.cleaned_data['route_lower']}) should " \
                     "be less than or equal to Highest Route Grade " \
                     f"(5.{form.cleaned_data['route_upper']}).\n"
+    # if the user did not want routes
+    else:  
+        rl = -1
+        ru = -1
 
     # create the config dictionary to pass into main
     inputs = {
