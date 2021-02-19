@@ -7,13 +7,14 @@ class NoColon(forms.Form):
 
 class RecInputForm(NoColon):
     url = forms.URLField(label="Mountain Project URL:", max_length=100)
-    latitude = forms.DecimalField(label="Latitude:", initial=33.8734)
-    longitude = forms.DecimalField(label="Longitude:", initial=-115.9010)
-    max_distance = forms.IntegerField(label="Max Distance (mi):", initial=50)
+    latitude = forms.DecimalField(label="Latitude:", initial=33.8734, min_value=-90, max_value=90)
+    longitude = forms.DecimalField(label="Longitude:", initial=-115.9010, min_value=-180, 
+        max_value=180)
+    max_distance = forms.IntegerField(label="Max Distance (mi):", initial=50, min_value=1)
     rec = forms.MultipleChoiceField(label="Recommenders:", choices=(
         ("top_pop", "Top Popular"),
         ("debug", "Debug (show input)")))
-    num_recs = forms.IntegerField(label="Number of Recommendations:", initial=10)
+    num_recs = forms.IntegerField(label="Number of Recommendations:", initial=10, min_value=1)
     boulder_lower = forms.IntegerField(label="Lowest Boulder Grade: V", min_value=0, max_value=16, 
         initial=0)
     boulder_upper = forms.IntegerField(label="Highest Boulder Grade: V", min_value=0, max_value=16,
