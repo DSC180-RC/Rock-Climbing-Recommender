@@ -27,7 +27,7 @@ def main(params=None):
         if(params["recommender"] == "top_pop"):
             return top_pop()
         elif(params["recommender"] == "other"):
-            return "user selected other rec"
+            return {"recommendations": [], "notes": "user selected other rec"}
         else:
             return str(params)
 

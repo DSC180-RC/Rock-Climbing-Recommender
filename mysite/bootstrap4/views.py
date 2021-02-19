@@ -61,36 +61,36 @@ def bootstrap4_index(request):
             from run import main
             results = main(inputs[0])
 
-            # transform the return dictionary into the proper format for django templates
-            trans_results = format_django(results)
+            # # transform the return dictionary into the proper format for django templates
+            # trans_results = format_django(results)
 
             # return the value of the main code
-            return render(request, 'index.html', template(form, "", inputs[0]["location"][0], 
-                inputs[0]["location"][1], trans_results))
+            return render(request, 'index.html', template(form, results["notes"], 
+                inputs[0]["location"][0], inputs[0]["location"][1], results["recommendations"]))
 
         return render(request, 'index.html', template(form))
 
     form = RecInputForm()
     return render(request, 'index.html', template(form))
 
-def format_django(results):
-    """
-    Take the output of the recommender and modify it so that django can automatically put it into
-    table form
+# def format_django(results):
+#     """
+#     Take the output of the recommender and modify it so that django can automatically put it into
+#     table form
 
-    :param:     results     The output of the recommender
+#     :param:     results     The output of the recommender
 
-    :return:    [{"name", "url"}, etc.]     The input recommendations formatted such that django
-                                            template and correctly put them into a table
-    """
-    formatted = []
-    for key, value in ast.literal_eval(results)["name"].items():
-        formatted.append({
-            "name": value,
-            "url": f"https://www.mountainproject.com/route/{key}"
-        })
+#     :return:    [{"name", "url"}, etc.]     The input recommendations formatted such that django
+#                                             template and correctly put them into a table
+#     """
+#     formatted = []
+#     for key, value in ast.literal_eval(results)["name"].items():
+#         formatted.append({
+#             "name": value,
+#             "url": f"https://www.mountainproject.com/route/{key}"
+#         })
 
-    return formatted
+#     return formatted
 
 def secondary_validation(form):  
     """
