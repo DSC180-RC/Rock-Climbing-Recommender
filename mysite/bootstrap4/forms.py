@@ -18,7 +18,7 @@ class RecInputForm(NoColon):
         initial=0)
     boulder_upper = forms.IntegerField(label="Highest Boulder Grade: V", min_value=0, max_value=16,
         initial=3)
-    get_boulder = forms.BooleanField(label="Boulder:")
+    get_boulder = forms.BooleanField(label="Boulder:", initial=True, required=False)
     route_lower = forms.CharField(label="Lowest Route Grade: 5.", max_length=3, initial="8")
     route_upper = forms.CharField(label="Highest Route Grade: 5.", max_length=3, initial="10d")
-    get_route = forms.BooleanField(label="Route:")
+    get_route = forms.BooleanField(label="Route:", initial=True, required=False)
