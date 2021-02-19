@@ -50,7 +50,7 @@ def bootstrap4_index(request):
         if(form.is_valid()):
 
             # run the secondary validation code
-            inputs = secondary_validation(request)
+            inputs = secondary_validation(form)
 
             # if there are errors, then the bool flag would be true
             if(inputs[1]):
@@ -93,12 +93,12 @@ def format_django(results):
     return formatted
 
 
-def secondary_validation(request):  
+def secondary_validation(form):  
     """
     This function runs some secondary validation code that I could not integrate into django
     without it messing up the website style
 
-    :param:     request     The POST request
+    :param:     form            The form containing cleaned data
 
     :return:    (dict, str)     The dict contains the input to the main function, and the string 
                                 contains the error message (can be "")
@@ -107,7 +107,7 @@ def secondary_validation(request):
     error_str = ""
 
     # get the url
-    url = request.POST.get("url")
+    url = form.cleaned_data["url"]
 
     # validate the url structure
     validator = URLValidator()
@@ -121,38 +121,39 @@ def secondary_validation(request):
         error_str += f"Mountain Project URL ({url}) is not a valid user page.\n"
 
     # get the boulder grades
-    bl = int(request.POST.get("boulder_lower"))
-    bu = int(request.POST.get("boulder_upper"))
+    bl = int(form.cleaned_data["boulder_lower"])
+    bu = int(form.cleaned_data["boulder_upper"])
 
-    # validate the boulder grades
-    if(bl > bu):
+    # validate the boulder grades if the box is checked
+    if((form.cleaned_data["get_boulder"]) and (bl > bu)):
         error_str += f"Lowest Boulder Grade (V{bl}) should be less than or equal to Highest " \
             f"Boulder Grade (V{bu}).\n"
 
     # get the route grades
-    rl = route_to_int(request.POST.get("route_lower"))
-    ru = route_to_int(request.POST.get("route_upper"))
+    rl = route_to_int(form.cleaned_data["route_lower"])
+    ru = route_to_int(form.cleaned_data["route_upper"])
 
-    # validate the route grades
-    if(rl is None):
-        error_str += f"Lowest Route Grade (5.{request.POST.get('route_lower')}) is an invalid " \
-            "difficulty.\n"
-    if(ru is None):
-        error_str += f"Highest Route Grade (5.{request.POST.get('route_upper')}) is an invalid " \
-            "difficulty.\n"
-    if((rl is not None) and (ru is not None)):
-        if(rl > ru):
-            error_str += f"Lowest Route Grade (5.{request.POST.get('route_lower')}) should be " \
-                f"less than or equal to Highest Route Grade " \
-                f"(5.{request.POST.get('route_upper')}).\n"
+    # validate the route grades if the box is checked
+    if(form.cleaned_data["get_route"]):
+        if(rl is None):
+            error_str += f"Lowest Route Grade (5.{form.cleaned_data["route_lower"]}) is an " \
+                "invalid difficulty.\n"
+        if(ru is None):
+            error_str += f"Highest Route Grade (5.{form.cleaned_data["route_upper"]}) is an " \
+             "invalid difficulty.\n"
+        if((rl is not None) and (ru is not None)):
+            if(rl > ru):
+                error_str += f"Lowest Route Grade (5.{form.cleaned_data["route_lower"]}) should " \
+                    "be less than or equal to Highest Route Grade " \
+                    f"(5.{form.cleaned_data["route_upper"]}).\n"
 
     # create the config dictionary to pass into main
     inputs = {
-        "user_url": request.POST.get("url"),
-        "location": [request.POST.get("latitude"), request.POST.get("longitude")],
-        "max_distance": request.POST.get("max_distance"),
-        "recommender": request.POST.get("rec"),
-        "num_recs": request.POST.get("num_recs"),
+        "user_url": form.cleaned_data["url"]
+        "location": [form.cleaned_data["latitude"], form.cleaned_data["longitude"]],
+        "max_distance": form.cleaned_data["max_distance"],
+        "recommender": form.cleaned_data["rec"],
+        "num_recs": form.cleaned_data["num_recs"],
         "difficulty_range": {
             "boulder": [bl, bu],
             "route": [rl, ru]
