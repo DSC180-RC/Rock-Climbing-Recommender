@@ -7,7 +7,7 @@
 import json 
 import csv
 
-from get_clean_data import split_into_user_climb
+from src.data.get_clean_data import split_into_user_climb
 
 from pymongo import MongoClient
 
