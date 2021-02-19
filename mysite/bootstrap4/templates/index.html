@@ -54,9 +54,11 @@
         function set_readonly(element, b) {
             if(b) {
                 document.getElementById(element).setAttribute("readonly", true);
+                document.getElementById(element).style.backgroundColor = "#CCCCCC";
             }
             else {
-                document.getElementById(element).removeAttribute("readonly")
+                document.getElementById(element).removeAttribute("readonly");
+                document.getElementById(element).style.backgroundColor = "#FFFFFF";
             }
         }
 
