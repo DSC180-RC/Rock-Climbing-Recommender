@@ -55,25 +55,25 @@
         document.getElementById("id_get_boulder").addEventListener("change", (event) => {
             if(event.currentTarget.checked) {
                 // if the box is checked, then enable the form elements
-                document.getElementById("id_boulder_upper").disabled = false;
-                document.getElementById("id_boulder_lower").disabled = false;
+                document.getElementById("id_boulder_upper").setAttribute("readonly", false);
+                document.getElementById("id_boulder_lower").setAttribute("readonly", false);
             } else {
                 // if the box is not checked, then disable the form elements
-                document.getElementById("id_boulder_upper").disabled = true;
-                document.getElementById("id_boulder_lower").disabled = true;
+                document.getElementById("id_boulder_upper").setAttribute("readonly", true);
+                document.getElementById("id_boulder_lower").setAttribute("readonly", true);
             }
         });
 
         // js to connect route checkboxes with the grade selector dynamically
         document.getElementById("id_get_route").addEventListener("change", (event) => {
             if(event.currentTarget.checked) {
-                // if the box is checked, then enable the form elements
-                document.getElementById("id_route_upper").disabled = false;
-                document.getElementById("id_route_lower").disabled = false;
+                // if the box is checked, then set form element to be not readonly
+                document.getElementById("id_route_upper").setAttribute("readonly", false);
+                document.getElementById("id_route_lower").setAttribute("readonly", false);
             } else {
-                // if the box is not checked, then disable the form elements
-                document.getElementById("id_route_upper").disabled = true;
-                document.getElementById("id_route_lower").disabled = true;
+                // if the box is checked, then set form element to be readonly
+                document.getElementById("id_route_upper").setAttribute("readonly", true);
+                document.getElementById("id_route_lower").setAttribute("readonly", true);
             }
         });
     </script>
@@ -85,23 +85,23 @@
         // check for boulder
         if(document.getElementById("id_get_boulder").checked) {
             // if the box is checked, then enable the form elements
-            document.getElementById("id_boulder_upper").disabled = false;
-            document.getElementById("id_boulder_lower").disabled = false;
+            document.getElementById("id_boulder_upper").setAttribute("readonly", false);
+            document.getElementById("id_boulder_lower").setAttribute("readonly", false);
         } else {
             // if the box is not checked, then disable the form elements
-            document.getElementById("id_boulder_upper").disabled = true;
-            document.getElementById("id_boulder_lower").disabled = true;
+            document.getElementById("id_boulder_upper").setAttribute("readonly", true);
+            document.getElementById("id_boulder_lower").setAttribute("readonly", true);
         }
 
         // check for route
         if(document.getElementById("id_get_route").checked) {
             // if the box is checked, then enable the form elements
-            document.getElementById("id_route_upper").disabled = false;
-            document.getElementById("id_route_lower").disabled = false;
+            document.getElementById("id_route_upper").setAttribute("readonly", false);
+            document.getElementById("id_route_lower").setAttribute("readonly", false);
         } else {
             // if the box is not checked, then disable the form elements
-            document.getElementById("id_route_upper").disabled = true;
-            document.getElementById("id_route_lower").disabled = true;
+            document.getElementById("id_route_upper").setAttribute("readonly", true);
+            document.getElementById("id_route_lower").setAttribute("readonly", true);
         }
     </script>
 
