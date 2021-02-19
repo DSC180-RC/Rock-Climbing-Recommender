@@ -151,7 +151,7 @@ def secondary_validation(form):
         "user_url": form.cleaned_data["url"],
         "location": [form.cleaned_data["latitude"], form.cleaned_data["longitude"]],
         "max_distance": form.cleaned_data["max_distance"],
-        "recommender": form.cleaned_data["rec"],
+        "recommender": form.cleaned_data["rec"][0], # note for some reason ["rec"] is a list
         "num_recs": form.cleaned_data["num_recs"],
         "difficulty_range": {
             "boulder": [bl, bu],
