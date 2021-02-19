@@ -51,16 +51,25 @@
     </div>
 
     <script type="text/javascript">
+        function set_readonly(element, b) {
+            if(b) {
+                document.getElementById(element).setAttribute("readonly");
+            }
+            else {
+                document.getElementById(element).removeAttribute("readonly")
+            }
+        }
+
         // js to connect boulder checkboxes with the grade selector dynamically
         document.getElementById("id_get_boulder").addEventListener("change", (event) => {
             if(event.currentTarget.checked) {
                 // if the box is checked, then enable the form elements
-                document.getElementById("id_boulder_upper").setAttribute("readonly", false);
-                document.getElementById("id_boulder_lower").setAttribute("readonly", false);
+                set_readonly("id_boulder_upper", false);
+                set_readonly("id_boulder_lower", false);
             } else {
                 // if the box is not checked, then disable the form elements
-                document.getElementById("id_boulder_upper").setAttribute("readonly", true);
-                document.getElementById("id_boulder_lower").setAttribute("readonly", true);
+                set_readonly("id_boulder_upper", true);
+                set_readonly("id_boulder_lower", true);
             }
         });
 
@@ -68,40 +77,38 @@
         document.getElementById("id_get_route").addEventListener("change", (event) => {
             if(event.currentTarget.checked) {
                 // if the box is checked, then set form element to be not readonly
-                document.getElementById("id_route_upper").setAttribute("readonly", false);
-                document.getElementById("id_route_lower").setAttribute("readonly", false);
+                set_readonly("id_route_upper", false);
+                set_readonly("id_route_lower", false);
             } else {
                 // if the box is checked, then set form element to be readonly
-                document.getElementById("id_route_upper").setAttribute("readonly", true);
-                document.getElementById("id_route_lower").setAttribute("readonly", true);
+                set_readonly("id_route_upper", true);
+                set_readonly("id_route_lower", true);
             }
         });
-    </script>
 
-    <script type="text/javascript">
         // also make sure that the checkboxes correctly enable/disable difficulty selection fields
         // on page load
 
         // check for boulder
         if(document.getElementById("id_get_boulder").checked) {
             // if the box is checked, then enable the form elements
-            document.getElementById("id_boulder_upper").setAttribute("readonly", false);
-            document.getElementById("id_boulder_lower").setAttribute("readonly", false);
+            set_readonly("id_boulder_upper", false);
+            set_readonly("id_boulder_lower", false);
         } else {
             // if the box is not checked, then disable the form elements
-            document.getElementById("id_boulder_upper").setAttribute("readonly", true);
-            document.getElementById("id_boulder_lower").setAttribute("readonly", true);
+            set_readonly("id_boulder_upper", true);
+            set_readonly("id_boulder_lower", true);
         }
 
         // check for route
         if(document.getElementById("id_get_route").checked) {
             // if the box is checked, then enable the form elements
-            document.getElementById("id_route_upper").setAttribute("readonly", false);
-            document.getElementById("id_route_lower").setAttribute("readonly", false);
+            set_readonly("id_route_upper", false);
+            set_readonly("id_route_lower", false);
         } else {
             // if the box is not checked, then disable the form elements
-            document.getElementById("id_route_upper").setAttribute("readonly", true);
-            document.getElementById("id_route_lower").setAttribute("readonly", true);
+            set_readonly("id_route_upper", true);
+            set_readonly("id_route_lower", true);
         }
     </script>
 
