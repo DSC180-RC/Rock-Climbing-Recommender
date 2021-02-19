@@ -155,6 +155,10 @@ def secondary_validation(form):
         rl = -1
         ru = -1
 
+    # make sure that the user selected at least one of boulder/route
+    if(bl == -1 and rl == -1):
+        error_str += "One of Boulder or Route must be checked.\n"
+
     # create the config dictionary to pass into main
     inputs = {
         "user_url": form.cleaned_data["url"],
