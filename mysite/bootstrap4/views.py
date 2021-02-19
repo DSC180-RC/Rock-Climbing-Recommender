@@ -92,7 +92,6 @@ def format_django(results):
 
     return formatted
 
-
 def secondary_validation(form):  
     """
     This function runs some secondary validation code that I could not integrate into django
@@ -140,7 +139,7 @@ def secondary_validation(form):
                 "invalid difficulty.\n"
         if(ru is None):
             error_str += f"Highest Route Grade (5.{form.cleaned_data["route_upper"]}) is an " \
-             "invalid difficulty.\n"
+                "invalid difficulty.\n"
         if((rl is not None) and (ru is not None)):
             if(rl > ru):
                 error_str += f"Lowest Route Grade (5.{form.cleaned_data["route_lower"]}) should " \
