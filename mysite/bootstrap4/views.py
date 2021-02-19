@@ -135,16 +135,16 @@ def secondary_validation(form):
     # validate the route grades if the box is checked
     if(form.cleaned_data["get_route"]):
         if(rl is None):
-            error_str += f"Lowest Route Grade (5.{form.cleaned_data["route_lower"]}) is an " \
+            error_str += f"Lowest Route Grade (5.{form.cleaned_data['route_lower']}) is an " \
                 "invalid difficulty.\n"
         if(ru is None):
-            error_str += f"Highest Route Grade (5.{form.cleaned_data["route_upper"]}) is an " \
+            error_str += f"Highest Route Grade (5.{form.cleaned_data['route_upper']}) is an " \
                 "invalid difficulty.\n"
         if((rl is not None) and (ru is not None)):
             if(rl > ru):
-                error_str += f"Lowest Route Grade (5.{form.cleaned_data["route_lower"]}) should " \
+                error_str += f"Lowest Route Grade (5.{form.cleaned_data['route_lower']}) should " \
                     "be less than or equal to Highest Route Grade " \
-                    f"(5.{form.cleaned_data["route_upper"]}).\n"
+                    f"(5.{form.cleaned_data['route_upper']}).\n"
 
     # create the config dictionary to pass into main
     inputs = {
