@@ -49,7 +49,31 @@
     </div>
 
     <script type="text/javascript">
-        // js to slightly
+        // js to connect boulder checkboxes with the grade selector dynamically
+        document.getElementById("id_get_boulder").addEventListener("change", (event) => {
+            if(event.currentTarget.checked) {
+                // if the box is checked, then disable the form elements
+                document.getElementById("id_boulder_upper").disabled = true;
+                document.getElementById("id_boulder_lower").disabled = true;
+            } else {
+                // if the box is not checked, then enable the form elements
+                document.getElementById("id_boulder_upper").disabled = false;
+                document.getElementById("id_boulder_lower").disabled = false;
+            }
+        });
+
+        // js to connect route checkboxes with the grade selector dynamically
+        document.getElementById("id_get_route").addEventListener("change", (event) => {
+            if(event.currentTarget.checked) {
+                // if the box is checked, then disable the form elements
+                document.getElementById("id_route_upper").disabled = true;
+                document.getElementById("id_route_lower").disabled = true;
+            } else {
+                // if the box is not checked, then enable the form elements
+                document.getElementById("id_route_upper").disabled = false;
+                document.getElementById("id_route_lower").disabled = false;
+            }
+        });
     </script>
 
     <script>
