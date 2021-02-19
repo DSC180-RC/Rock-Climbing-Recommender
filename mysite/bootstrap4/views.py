@@ -148,7 +148,7 @@ def secondary_validation(form):
 
     # create the config dictionary to pass into main
     inputs = {
-        "user_url": form.cleaned_data["url"]
+        "user_url": form.cleaned_data["url"],
         "location": [form.cleaned_data["latitude"], form.cleaned_data["longitude"]],
         "max_distance": form.cleaned_data["max_distance"],
         "recommender": form.cleaned_data["rec"],
