@@ -35,10 +35,12 @@
         </form>
         <p>{{ notes }}</p>
         <table>
+            {% if results %}
             <tr>
                 <th>Climb Name</th>
                 <th>Climb URL</th>
             </tr>
+            {% endif %}
             {% for r in results %}
             <tr>
                 <td>{{ r.name }}</td>
