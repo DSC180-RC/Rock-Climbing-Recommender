@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Rock+Salt&display=swap" rel="stylesheet">
     <style type="text/css">
         input[type="number"]::-webkit-outer-spin-button,
         input[type="number"]::-webkit-inner-spin-button {
@@ -15,12 +17,21 @@
         input[type="number"] {
             -moz-appearance: textfield;
         }
+        body {
+            max-width: 1000px;
+            margin: auto;
+            background-color: #ffffff;
+            font-family: 'Lato', sans-serif;
+        }
+        h1 {
+            font-family: 'Rock Salt', cursive;
+        }
     </style>
     <title>TITLE TODO</title>
 </head>
 
 <body>
-    <div class="jumbotron text-center">
+    <div class="text-center bg-white">
         <h1>Rock Climbing Recommender (Test Title)</h1>
         <p>Test subtext</p>
         <form method="POST">
