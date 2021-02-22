@@ -57,6 +57,15 @@
         #id_route_upper {
             width: 35px;
         }
+        #boulder-check {
+            margin-top: 30px;
+        }
+        #route-check {
+            margin-top: 30px;
+        }
+        #rec-box {
+            margin-top: 30px;
+        }
     </style>
     <title>TITLE TODO</title>
 </head>
@@ -86,13 +95,13 @@
                     </div>
                     <div class="col-md-3">
                         <div class="short-div">{{ form.num_recs }}</div>
-                        <div class="short-div">{{ form.get_boulder.label_tag }} {{ form.get_boulder }}</div>
+                        <div class="short-div" id="boulder-check">{{ form.get_boulder.label_tag }} {{ form.get_boulder }}</div>
                         <div class="short-div">{{ form.boulder_lower.label_tag }} {{ form.boulder_lower }}</div>
                         <div class="short-div">{{ form.boulder_upper.label_tag }} {{ form.boulder_upper }}</div>
-                        <div class="short-div">{{ form.get_route.label_tag }} {{ form.get_route }}</div>
+                        <div class="short-div" id="route-check">{{ form.get_route.label_tag }} {{ form.get_route }}</div>
                         <div class="short-div">{{ form.route_lower.label_tag }} {{ form.route_lower }}</div>
                         <div class="short-div">{{ form.route_upper.label_tag }} {{ form.route_upper }}</div>
-                        <div class="short-div">{{ form.rec.label_tag }} {{ form.rec }}</div>
+                        <div class="short-div" id="rec-box">{{ form.rec.label_tag }} {{ form.rec }}</div>
                     </div>
                 </div>
             </div>
