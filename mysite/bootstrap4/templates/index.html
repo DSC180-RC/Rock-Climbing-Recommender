@@ -70,6 +70,9 @@
         #rec-box {
             margin-top: 30px;
         }
+        #submit-button {
+            margin-top: 30px;
+        }
     </style>
     <title>ONSIGHT</title>
 </head>
@@ -106,11 +109,11 @@
                         <div class="short-div">{{ form.route_lower.label_tag }} {{ form.route_lower }}</div>
                         <div class="short-div">{{ form.route_upper.label_tag }} {{ form.route_upper }}</div>
                         <div class="short-div" id="rec-box">{{ form.rec.label_tag }} {{ form.rec }}</div>
+                        <div class="short-div"><button type="submit" name="run_script" id="submit-button">Submit</button></div>
                     </div>
                 </div>
             </div>
 
-            <button type="submit" name="run_script">Submit</button>
         </form>
         <p>{{ notes }}</p>
         <table>
