@@ -115,8 +115,32 @@
             </div>
 
         </form>
-        <p>{{ notes }}</p>
-        <table>
+
+        <!-- Only put in notes if they are present -->
+        {% if notes %}
+        <p style="margin-top: 20px;">{{ notes }}</p>
+        {% endif %}
+
+        <!-- Only put in recommendations if they are present -->
+        {% if results %}
+        <div class="container-fluid" style="max-width: 600px; margin: auto;">
+            <div class="row">
+                <div class="col-md-2"><b>Climb Name</b></div>
+                <div class="col-md-1"><b>Grade</b></div>
+                <div class="col-md-9"><b>Climb Name</b></div>
+            </div>
+            <!-- Loop over the recommendations -->
+            {% for r in results %}
+            <div class="row">
+                <div class="col-md-2"><a href="https://www.mountainproject.com/route/{{ r.url }}">{{ r.name }}</a></div>
+                <div class="col-md-1">Difficulty here</div>
+                <div class="col-md-9">Truncated climb description</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+<!--         <table>
             {% if results %}
             <tr>
                 <th>Climb Name</th>
@@ -129,7 +153,7 @@
                 <td><a href="https://www.mountainproject.com/route/{{ r.url }}">{{ r.url }}</a></td>
             </tr>
             {% endfor %}
-        </table>
+        </table> -->
     </div>
 
     <script type="text/javascript">
