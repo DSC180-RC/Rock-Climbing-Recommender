@@ -9,6 +9,7 @@ import pandas as pd
 from pymongo import MongoClient
 
 from src.functions import make_absolute
+from src.model.model_functions import filter_df
 
 from math import sin, cos, sqrt, atan2, radians
 
@@ -52,31 +53,33 @@ def top_pop(args=None, data_params=None, web_params=None):
     # returns a simple TopPopular
     toppop = df[df['avg_rating'] >= 3.5].sort_values('num_ratings', ascending=False)
 
-    # filter by location
+    # # filter by location
+    # def calc_distance(x):
+    #     # approximate radius of earth in km
+    #     R = 6373.0
+    #     lat1 = radians(web_params['location'][0])
+    #     lon1 = radians(web_params['location'][1])
+    #     lat2 = radians(x['latitude'])
+    #     lon2 = radians(x['longitude'])
+    #     dlon = lon2 - lon1
+    #     dlat = lat2 - lat1
+    #     a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+    #     c = 2 * atan2(sqrt(a), sqrt(1 - a))
+    #     distance = R * c * 0.621371 #convert to miles by multiplying by 0.621371
+    #     return distance
+    # toppop = toppop[toppop.apply(calc_distance, axis=1) <= web_params['max_distance']]
     
-    def calc_distance(x):
-        # approximate radius of earth in km
-        R = 6373.0
-        lat1 = radians(web_params['location'][0])
-        lon1 = radians(web_params['location'][1])
-        lat2 = radians(x['latitude'])
-        lon2 = radians(x['longitude'])
-        dlon = lon2 - lon1
-        dlat = lat2 - lat1
-        a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
-        c = 2 * atan2(sqrt(a), sqrt(1 - a))
-        distance = R * c * 0.621371 #convert to miles by multiplying by 0.621371
-        return distance
-    toppop = toppop[toppop.apply(calc_distance, axis=1) <= web_params['max_distance']]
-    
-    # filter by type of climb and difficulty
-    def type_and_difficulty_check(x):
-        if x['boulder_climb'] == 1 and x['difficulty'] >= web_params['difficulty_range']['boulder'][0] and x['difficulty'] <= web_params['difficulty_range']['boulder'][1]:
-            return True
-        if x['rock_climb'] == 1 and x['difficulty'] >= web_params['difficulty_range']['route'][0] and x['difficulty'] <= web_params['difficulty_range']['route'][1]:
-            return True
-        return False
-    toppop = toppop[toppop.apply(type_and_difficulty_check, axis=1)]
+    # # filter by type of climb and difficulty
+    # def type_and_difficulty_check(x):
+    #     if x['boulder_climb'] == 1 and x['difficulty'] >= web_params['difficulty_range']['boulder'][0] and x['difficulty'] <= web_params['difficulty_range']['boulder'][1]:
+    #         return True
+    #     if x['rock_climb'] == 1 and x['difficulty'] >= web_params['difficulty_range']['route'][0] and x['difficulty'] <= web_params['difficulty_range']['route'][1]:
+    #         return True
+    #     return False
+    # toppop = toppop[toppop.apply(type_and_difficulty_check, axis=1)]
+
+    toppop = filter_df(toppop, web_params["location"], web_params["max_distance"], 
+        web_params["difficulty_range"])
     
     # create the formatted recommendations dict based on the number of recommendations to output
     result = list(toppop[['climb_id', 'name']][:web_params['num_recs']].apply(lambda x: {"name": x[1], "url": x[0]}, axis=1))
