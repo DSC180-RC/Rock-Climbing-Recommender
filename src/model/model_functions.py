@@ -171,14 +171,14 @@ def filter_type_difficulty(df, diff_ranges):
 
     # if the user wants boulders
     if(boulders):
-        boulder_mask = (df["boulder_climb"] == 1) | \
-            (df["difficulty"] >= diff_ranges["boulder"][0]) | \
+        boulder_mask = (df["boulder_climb"] == 1) & \
+            (df["difficulty"] >= diff_ranges["boulder"][0]) & \
             (df["difficulty"] <= diff_ranges["boulder"][1])
 
     # if the user wants routes
     if(routes):
-        route_mask = (df["rock_climb"] == 1) | \
-            (df["difficulty"] >= diff_ranges["route"][0]) | \
+        route_mask = (df["rock_climb"] == 1) & \
+            (df["difficulty"] >= diff_ranges["route"][0]) & \
             (df["difficulty"] <= diff_ranges["route"][1])
 
     # combine the masks are necessary 
