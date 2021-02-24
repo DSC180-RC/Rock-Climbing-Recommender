@@ -2,7 +2,8 @@
 # Eric Liu
 # Brent Min
 
-# top_pop.py contains all the logic needed to return the most basic top 10 most popular/well received routes
+# top_pop.py contains a top popular recommender, where climbs are first filtered to those over
+# 3.5/4 stars, then sorted by number of reviews.
 
 import pandas as pd
 from pymongo import MongoClient
@@ -13,11 +14,21 @@ from math import sin, cos, sqrt, atan2, radians
 
 def top_pop(args=None, data_params=None, web_params=None):
     """
-    TODO
+    A simple top popular which takes climbs over 3.5/4 stars and returns those climbs with the
+    most number of reviews.
 
-    :param:     args            TODO
-    :param:     data_params     TODO
-    :param:     web_params      TODO
+    :param:     args            Command line arguments
+    :param:     data_params     Data params for running the project from the command line
+    :param:     web_params      Params from the website
+
+    :return:    dict            A dictionary in the following format:   
+                                {
+                                    "recommendations": [{"name": str, "url": int, "reason": str,
+                                        "difficulty": str, "description": str}, {}, ...],
+                                    "notes": str
+                                }
+                                Where each item in the "recommendations" list is a singular 
+                                recommendation. All recommenders should return in this format
     """
     # change behavior if testing
     if((args is not None) and args["test"]):
