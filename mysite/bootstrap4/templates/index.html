@@ -73,6 +73,12 @@
         #submit-button {
             margin-top: 30px;
         }
+        #recommendations {
+            max-width: 1000px; 
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
     <title>ONSIGHT</title>
 </head>
@@ -123,7 +129,7 @@
 
         <!-- Only put in recommendations if they are present -->
         {% if results %}
-        <div class="container-fluid" style="max-width: 1000px; margin: auto;">
+        <div class="container-fluid" id="recommendations">
             <div class="row">
                 <div class="col-md-2"><b>Climb Name</b></div>
                 <div class="col-md-1"><b>Grade</b></div>
