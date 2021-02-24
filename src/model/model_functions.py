@@ -33,13 +33,14 @@ def filter_df(df, location, distance, diff_ranges):
         return df
 
     # now filter by location
-    df["dis_mi"] = df.apply(lambda x: distance(location, [x["latitude"], x["longitude"]]), axis=1)
+    df["dis_mi"] = df.apply(lambda x: distance_lat_lng(location, (x["latitude"], x["longitude"])), 
+        axis=1)
     df = df.loc[df["dis_mi"] <= distance]
 
     # return the filtered df
     return df
 
-def distance(start_lat_lng, end_lat_lng):
+def distance_lat_lng(start_lat_lng, end_lat_lng):
     """
     This function returns the distance between two lat/lng pairs in miles
     TODO: use a approximation function to cut down on compute time?
@@ -83,25 +84,52 @@ def filter_type_difficulty(df, diff_ranges):
 
     :return:    pd.DataFrame    The input df filtered based on the parameters
     """
-    # check if the user wants bouders
-    if(diff_ranges["boulder"][0] != -1):
-        # if the user wants boulders, filter by difficulty
-        df = df.loc[(df["boulder_climb"] == 1) & \
-            (df["difficulty"] >= diff_ranges["boulder"][0]) & \
-            (df["difficulty"] <= diff_ranges["boulder"][1])]
-    else:
-        # if the user does not want boulders, remove all boulders
-        df = df.loc[df["boulder_climb"] == 0]
+    # store booleans to keep track if the user wants routes/boulders
+    boulders = diff_ranges["boulder"][0] != -1
+    routes = diff_ranges["route"][0] != -1
 
-    # check if the user wants routes
-    if(diff_ranges["route"][0] != -1):
-        # if the user wants routes, filter by difficulty
-        df = df.loc[(df["rock_climb"] == 1) & \
-            (df["difficulty"] >= diff_ranges["route"][0]) & \
-            (df["difficulty"] <= diff_ranges["route"][1])]
-    else:
-        # if the user does not want boulders, remove all boulders
-        df = df.loc[df["rock_climb"] == 0]
+    # if the user wants boulders
+    if(boulders):
+        boulder_mask = (df["boulder_climb"] == 1) | \
+            (df["difficulty"] >= diff_ranges["boulder"][0]) | \
+            (df["difficulty"] <= diff_ranges["boulder"][1])
 
-    # return the filtered df
-    return df
+    # if the user wants routes
+    if(routes):
+        route_mask = (df["rock_climb"] == 1) | \
+            (df["difficulty"] >= diff_ranges["route"][0]) | \
+            (df["difficulty"] <= diff_ranges["route"][1])
+
+    # combine the masks are necessary 
+    if(boulders and routes):
+        return df[boulder_mask | route_mask]
+    elif(boulders):
+        return df[boulder_mask]
+    elif(routes):
+        return df[route_mask]
+
+    # print(df, "\n")
+    # # check if the user wants bouders
+    # if(diff_ranges["boulder"][0] != -1):
+    #     # if the user wants boulders, filter by difficulty
+    #     df = df.loc[(df["boulder_climb"] == 1) & \
+    #         (df["difficulty"] >= diff_ranges["boulder"][0]) & \
+    #         (df["difficulty"] <= diff_ranges["boulder"][1])]
+    # else:
+    #     # if the user does not want boulders, remove all boulders
+    #     df = df.loc[df["boulder_climb"] == 0]
+    # print(df, "\n")
+
+    # # check if the user wants routes
+    # if(diff_ranges["route"][0] != -1):
+    #     # if the user wants routes, filter by difficulty
+    #     df = df.loc[(df["rock_climb"] == 1) & \
+    #         (df["difficulty"] >= diff_ranges["route"][0]) & \
+    #         (df["difficulty"] <= diff_ranges["route"][1])]
+    # else:
+    #     # if the user does not want boulders, remove all boulders
+    #     df = df.loc[df["rock_climb"] == 0]
+    # print(df, "\n")
+
+    # # return the filtered df
+    # return df

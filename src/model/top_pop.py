@@ -78,6 +78,16 @@ def top_pop(args=None, data_params=None, web_params=None):
     #     return False
     # toppop = toppop[toppop.apply(type_and_difficulty_check, axis=1)]
 
+    web_params = {
+        "location": [37.709807, -119.566228],
+        "max_distance": 50,
+        "difficulty_range": {
+            "boulder": [0, 3],
+            "route": [0, 15]
+        },
+        "num_recs": 10
+    }
+
     toppop = filter_df(toppop, web_params["location"], web_params["max_distance"], 
         web_params["difficulty_range"])
     
