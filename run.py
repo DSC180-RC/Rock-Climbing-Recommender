@@ -31,8 +31,8 @@ def main(params=None):
             return cosine_rec(None, None, params)
         elif(params["recommender"] == "debug"):
             results = top_pop(None, None, params)
-            results["notes"] += f"\nInput is: {str(params)}" \
-                f"\nOutput is: {str(results['recommendations'])}"
+            results["notes"].append(f"\nInput is: {str(params)}")
+            results["notes"].append(f"\nOutput is: {str(results['recommendations'])}")
             return results
         else:
             return str(params)
