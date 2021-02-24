@@ -61,7 +61,7 @@ def top_pop(args=None, data_params=None, web_params=None):
     toppop = toppop[:web_params["num_recs"]]
 
     # generate any generic notes
-    notes = generate_notes(toppop)
+    notes = generate_notes(toppop, web_params)
     
     # create the formatted recommendations dict based on the number of recommendations to output
     result = format_df(toppop)
