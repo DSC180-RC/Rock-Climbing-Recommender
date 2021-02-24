@@ -124,7 +124,11 @@
 
         <!-- Only put in notes if they are present -->
         {% if notes %}
-        <p style="margin-top: 20px;">{{ notes }}</p>
+        <div style="margin-top: 20px;">
+            {% for n in notes %}
+                <p>{{ n }}</p>
+            {% endfor %}
+        </div>
         {% endif %}
 
         <!-- Only put in recommendations if they are present -->

@@ -8,6 +8,40 @@ import pandas as pd
 
 import math
 
+def generate_notes(rec_df, web_params):
+    """
+    This function generates a list of notes based on the recommendations and the web_params. Note 
+    this function should be called on the same input to format_df(), not on the output of 
+    format_df()
+
+    :param:     rec_df      The df of recommendations. It is assumed that this df contains all 
+                            columns from the original cleaned data
+    :param:     web_params  Params from the website
+
+    :return     [str]   A list of strings where each string is a note. Can be an empty list
+    """
+    # store notes here
+    notes = []
+
+    # make sure the correct number of recommendations were generated
+    if(len(rec_df.index) < web_params["num_recs"]):
+        note_str = f"Could not generate {web_params['num_recs']} recommendations based on the " \
+            "selected options."
+        notes.append(note_str)
+
+    # make sure that at least some boulders were recommended if the user wanted boulders
+    if(web_params["difficulty_range"]["boulder"][0] != -1):
+        pass
+        # TODO
+
+    # make sure that at least some routes were recommended if the user wanted routes
+    if(web_params["difficulty_range"]["route"][0] != -1):
+        pass
+        # TODO
+
+    # return the notes
+    return notes
+
 def format_df(rec_df):
     """
     This function takes the input df and formats it so that django can easily display it.

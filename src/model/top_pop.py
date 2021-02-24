@@ -9,7 +9,7 @@ import pandas as pd
 from pymongo import MongoClient
 
 from src.functions import make_absolute
-from src.model.model_functions import filter_df, format_df
+from src.model.model_functions import filter_df, format_df, generate_notes
 
 from math import sin, cos, sqrt, atan2, radians
 
@@ -59,16 +59,12 @@ def top_pop(args=None, data_params=None, web_params=None):
 
     # get however many recommendations are requested
     toppop = toppop[:web_params["num_recs"]]
+
+    # generate any generic notes
+    notes = generate_notes(toppop)
     
     # create the formatted recommendations dict based on the number of recommendations to output
     result = format_df(toppop)
 
-    # make sure the correct number of climbs were returned
-    notes = ""
-    if(len(result) < web_params["num_recs"]):
-        notes = f"Could not generate {web_params['num_recs']} recommendations based on the " \
-            "selected options."
-
-    result = {"recommendations": result, "notes": notes}
-
-    return result
+    # put results and notes together and return 
+    return  {"recommendations": result, "notes": notes}
