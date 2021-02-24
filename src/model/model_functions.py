@@ -8,6 +8,52 @@ import pandas as pd
 
 import math
 
+def format_df(rec_df):
+    """
+    This function takes the input df and formats it so that django can easily display it.
+
+    :param:     rec_df      The df of recommendations. It is assumed that this df contains all 
+                            columns from the original cleaned data
+
+    :return:    [{}]        A list of dictionaries in the following format: 
+                            [{"name": str, "url": int, "reason": str, "difficulty": str, 
+                            "description": str}, {}, ...]
+                            Each dictionary is a singular recommendation
+    """
+    # make sure there are recommendations
+    if(len(rec_df.index) == 0):
+        return []
+
+    # create and return a list of the correct format
+    formatted = rec_df.apply(lambda row: {"name": row["name"], "url": row["climb_id"],
+        "difficulty": row_to_difficulty(row), "reason": "", "description": row["description"]}, 
+        axis=1)
+    return list(formatted)
+
+def row_to_difficulty(row):
+    """
+    This function takes a single row of a df and converts the difficulty integer to the correct
+    string based on whether the climb is a boulder or route
+
+    :param:     row     A row of the df. This should have at minimum columns "difficulty" and
+                        "boulder_climb"
+
+    :return:    str     A string representation of the climb difficulty (V_ or 5._)
+    """
+    # check if the climb is a boulder
+    if(row["boulder_climb"] == 1):
+        # return the proper string
+        mapping = ["V0", "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", 
+            "V13", "V14", "V15", "V16"]
+        return mapping[row["difficulty"]]
+    # if the climb is not a boulder, it is assumed to be a route
+    else:
+        mapping = ['3rd', '4th', 'Easy 5th', '5.0', "5.1", "5.2", "5.3", "5.4", "5.5", "5.6", 
+            "5.7", "5.8", "5.9", "5.10a", "5.10b", "5.10c", "5.10d", "5.11a", "5.11b", "5.11c", 
+            "5.11d", "5.12a", "5.12b", "5.12c", "5.12d", "5.13a", "5.13b", "5.13c", "5.13d", 
+            "5.14a", "5.14b", "5.14c", "5.14d", "5.15a", "5.15b", "5.15c", "5.15d"]
+        return mapping[row["difficulty"]]
+
 def filter_df(df, location, distance, diff_ranges):
     """
     This function filters the input df based on the other three paramters, using the functions 
@@ -29,6 +75,7 @@ def filter_df(df, location, distance, diff_ranges):
     df = filter_type_difficulty(df, diff_ranges)
 
     # make sure that the df is not empty before filtering by location
+    # an exception is raised when you try to apply from an empty df
     if(len(df.index) == 0):
         return df
 
@@ -107,29 +154,3 @@ def filter_type_difficulty(df, diff_ranges):
         return df[boulder_mask]
     elif(routes):
         return df[route_mask]
-
-    # print(df, "\n")
-    # # check if the user wants bouders
-    # if(diff_ranges["boulder"][0] != -1):
-    #     # if the user wants boulders, filter by difficulty
-    #     df = df.loc[(df["boulder_climb"] == 1) & \
-    #         (df["difficulty"] >= diff_ranges["boulder"][0]) & \
-    #         (df["difficulty"] <= diff_ranges["boulder"][1])]
-    # else:
-    #     # if the user does not want boulders, remove all boulders
-    #     df = df.loc[df["boulder_climb"] == 0]
-    # print(df, "\n")
-
-    # # check if the user wants routes
-    # if(diff_ranges["route"][0] != -1):
-    #     # if the user wants routes, filter by difficulty
-    #     df = df.loc[(df["rock_climb"] == 1) & \
-    #         (df["difficulty"] >= diff_ranges["route"][0]) & \
-    #         (df["difficulty"] <= diff_ranges["route"][1])]
-    # else:
-    #     # if the user does not want boulders, remove all boulders
-    #     df = df.loc[df["rock_climb"] == 0]
-    # print(df, "\n")
-
-    # # return the filtered df
-    # return df
