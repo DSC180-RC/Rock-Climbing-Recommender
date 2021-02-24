@@ -28,8 +28,12 @@ def filter_df(df, location, distance, diff_ranges):
     # in order to reduce compute time, first filter by difficulty
     df = filter_type_difficulty(df, diff_ranges)
 
+    # make sure that the df is not empty before filtering by location
+    if(len(df.index) == 0):
+        return df
+
     # now filter by location
-    df["dis_mi"] = df.apply(lambda x: distance(location, (x["latitude"], x["longitude"])), axis=1)
+    df["dis_mi"] = df.apply(lambda x: distance(location, [x["latitude"], x["longitude"]]), axis=1)
     df = df.loc[df["dis_mi"] <= distance]
 
     # return the filtered df
