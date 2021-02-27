@@ -6,5 +6,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url("about/", views.about, name="about"),
+    url("developers/", views.developers, name="developers"),
     url("", views.bootstrap4_index, name="index"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
