@@ -30,7 +30,7 @@ def generate_notes(rec_df, web_params):
         notes.append(note_str)
 
     # make sure that at least some boulders were recommended if the user wanted boulders
-    if(web_params["difficulty_range"]["boulder"][0] != -1):
+    if((web_params["difficulty_range"]["boulder"][0] != -1) and (len(rec_df.index) > 0)):
         # sum up the boulder_climb column
         # if this column has at least on non zero value, then at least one boulder was recommended
         # note that here we use len(rec_df.index) instead of web_params["num_recs"], since it is
@@ -40,7 +40,7 @@ def generate_notes(rec_df, web_params):
             notes.append(f"The top {len(rec_df.index)} recommendations are all routes.")
 
     # make sure that at least some routes were recommended if the user wanted routes
-    if(web_params["difficulty_range"]["route"][0] != -1):
+    if((web_params["difficulty_range"]["route"][0] != -1) and (len(rec_df.index) > 0)):
         # use the same logic as above
         num_routes = rec_df["rock_climb"].sum()
         if(num_routes == 0):
