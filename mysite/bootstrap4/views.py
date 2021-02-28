@@ -22,6 +22,9 @@ def about(request):
 def developers(request):
     return render(request, "developers.html")
 
+def algorithims(request):
+    return render(request, "algorithims.html")
+
 def template(form=None, notes="", latitude=33.8734, longitude=-115.9010, results=[]):
     """
     A nice way to update all template inputs to the render functions all at once.
