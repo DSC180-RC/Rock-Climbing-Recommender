@@ -46,7 +46,7 @@
             width: 80px;
         }
         #id_max_distance {
-            width: 50px;
+            width: 36px;
         }
         label[for=id_num_recs] {
             margin-bottom: 0px;
@@ -105,7 +105,7 @@
                     </div>
                 </div>
             </nav>
-            <div class="text-left" style="margin-bottom: 20px; margin-left: 30px">Outdoor Rock Climbing Recommendations</div>
+            <div class="text-left" style="margin-bottom: 30px; margin-left: 30px">Outdoor Rock Climbing Recommendations</div>
         </div>
 
         <!-- Recommendation input -->
@@ -115,12 +115,12 @@
             <!-- Custom bs4 grid for form layout -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2 text-left">
+                    <div class="col-md-3 text-left">
                         <p>This is a outdoor rock climbing recommender primarily built for those outdoor climbers who are looking for new rock to climb. If you are confused about the route/boulder grades section, REI has an amazing article about climbing difficulty <a href="https://www.rei.com/learn/expert-advice/climbing-bouldering-rating.html" target="_blank" rel="noopener noreferrer">here</a>.</p>
                         <p>The Mountain Project URL is only required if you desire personalized recommendations. The Mountain Project URL can be found be logging into <a href="https://www.mountainproject.com" target="_blank" rel="noopener noreferrer">Mountain Project</a>, clicking on your profile picture in the top right, then clicking on your page.</p>
                         <p>Lastly, for location you can either manually enter in a latatude and longitude, use the search box on the map, or drag and scroll on the map to adjust your location.</p>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         <div class="row">
                             <div class="col-md-12">{{ form.url.label_tag }} {{ form.url }}</div>
                         </div>
@@ -133,7 +133,7 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <input type="text" id="pac-input" class="controls", placeholder="Search Box">
-                                <div id="googleMap" style="width:100%;height:450px;"></div>
+                                <div id="googleMap" style="width:100%;height:400px;"></div>
                             </div>
                             <div class="col-md-3">
                                 <div class="short-div">{{ form.num_recs }}</div>
