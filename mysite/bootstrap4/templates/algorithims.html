@@ -79,7 +79,8 @@
             </div>
             <div class="row" style="margin-bottom: 20px;">
                 <div class="col-md-5 text-left">
-                    <p>Cosine similarity explanation</p>
+                    <p>The cosine similarity recommender we use starts similarily to the top popular, by filtering all climbs by location, type of climb, and by difficulty. The recommender then scrapes the user's Mountain Project account and gets their favorite climbs, as defined as all those climbs which the user rated highest. Now, the recommender has a list of favorite climbs, and a list of possible recommendations that match the user's filters.</p>
+                    <p>Then, cosine similarity scores are computed between all of the user's favorite climbs and all possible recommendations. The exact formula for cosine similarity comes from <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html" target="_blank" rel="noopener noreferrer">sklearn.metrics.pairwise.cosine_similarity</a>. Then, the list of possible recommendations is sorted by highest similarity, and the top N climbs are returned.</p>
                 </div>
                 <div class="col-md-7">
                     <figure class="figure">
