@@ -58,7 +58,10 @@
                     </figure>
                 </div>
                 <div class="col-md-5 text-left">
-                    <p>Top Popular explanation</p>
+                    <p>The top popular recommender we use is extremely simple. Climbs are first filtered by location, by type of climb, and by difficulty. Then we take all remaining climbs that have an average rating over 3.5 out of 4 stars, then sort by the number of ratings.</p>
+                    <p>Note the reason the top popular recommender has a minimum rating is to prevent popular but not as high quality climbs from being recommended. Using a star rating filter ensures that the top popular recommendations are only the highest quality climbs.</p>
+                    <p>A proposed extension of the top popular recommender is a highest rated recommender, taking into account number of ratings with a binomial confidence interval, such as the Wilson score interval. Such a recommender would give the highest rated climbs, with an overall lower weight given to low quantity of ratings, and an overall higher weight given to high quantity of ratings.</p>
+                    <p>Currently, the top rated recommender is not implemented, but likely will be in the future.</p>
                 </div>
             </div>
             <div class="row" style="margin-bottom: 20px;">
