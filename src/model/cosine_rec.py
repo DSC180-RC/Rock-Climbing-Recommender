@@ -39,7 +39,7 @@ def cosine_rec(args=None, data_params=None, web_params=None):
     df['climb_type'] = df['climb_type'].apply(lambda x: x.strip('][').split(', '))   
 
     # filter the df based on the web params
-    df = filter_df(df, web_params["location"], web_params["max_distance"], 
+    df_filtered = filter_df(df, web_params["location"], web_params["max_distance"], 
         web_params["difficulty_range"])
 
     #get user's past rating data
