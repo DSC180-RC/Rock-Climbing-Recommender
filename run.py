@@ -48,8 +48,10 @@ def main(params=None):
         help="Where to find data parameters. By default \"config/data_params.json\".")
     parser.add_argument("--web-config", default=["config/web_params.json"], type=str, nargs=1,
         help="Where to find simulated web parameters. By default \"config/web_params.json\".")
-    parser.add_argument("-p", "--top-pop", action="store_true", help="The program will run data " \
-        "return the top 10 most popular/well received as a csv if this flag is present.")
+    parser.add_argument("--top-pop", action="store_true", help="The program will print the " \
+        "the top 10 most popular/well received climbs based on the web params.")
+    parser.add_argument("--cosine", action="store_true", help="The program will print the " \
+        "the top 10 most similar climbs based on the web params.")
     parser.add_argument("--test", action="store_true", help="The program will run all code in a " \
         "simplified manner. If this flag is present, it will override all other flags and run " \
         "as if the command \"python run.py -d -c -p\" was run on a small dataset.")
@@ -80,6 +82,10 @@ def main(params=None):
     # run top pop code if requested
     if(args["top_pop"]):
         print(top_pop(args, data_params, web_params))
+
+    # run top pop code if requested
+    if(args["cosine"]):
+        print(cosine_rec(args, data_params, web_params))
 
 # run.py cannot be imported as a module
 if __name__ == '__main__':
