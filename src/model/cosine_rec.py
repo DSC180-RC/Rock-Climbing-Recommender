@@ -27,21 +27,12 @@ def cosine_rec(args=None, data_params=None, web_params=None):
     :param:     data_params     TODO
     :param:     web_params      TODO
     """
-    # change behavior if testing
-    if((args is not None) and args["test"]):
-        # get the url at which raw data will be found
-        clean_data_path = make_absolute(data_params["clean_data_folder"] + "climbs.csv")
-        print(clean_data_path)
-        
-        # get the data
-        df = pd.read_csv(clean_data_path)
-    else:
-        # accessing the data from our MongoDB
-        client = MongoClient('mongodb+srv://DSC102:coliniscool@cluster0.4gstr.mongodb.net/MountainProject?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE')
-        
-        # get the data
-        climbs = client.MountainProject.climbs
-        df = pd.DataFrame.from_records(list(climbs.find()))
+    # accessing the data from our MongoDB
+    client = MongoClient('mongodb+srv://DSC102:coliniscool@cluster0.4gstr.mongodb.net/MountainProject?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE')
+    
+    # get the data
+    climbs = client.MountainProject.climbs
+    df = pd.DataFrame.from_records(list(climbs.find()))
 
     # cleans the data
     df = df.fillna(-1)
