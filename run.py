@@ -55,7 +55,7 @@ def main(params=None):
     parser.add_argument("--test", action="store_true", help="The program will run all code in a " \
         "simplified manner. If this flag is present, it will run top popular and cosine "
         "recommenders using pre-cleaned data in MongoDB. Using the --test flag is equivalent to " \
-        "running the project using \"python run.py --top-pop --cosine\"")
+        "running the project using \"python run.py --top-pop --cosine\".")
     parser.add_argument("--delete", action="store_true", help="The program will wipe out all " \
         "data from MongoDB. This will not work since the MongoDB login is read only.")
     parser.add_argument("--upload", action="store_true", help="The program will upload cleaned " \
